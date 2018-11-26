@@ -2,6 +2,8 @@
 File Reference Net (frefnet) is used to manage all the files that we store in the cloud for a client
 
 ## Usage
+
+* Run `rake frefnet:install:migrations`
 * Will add a `frefnet_file_references` table to your database schema
 * Will add a GET endpoint to your system that allows for you to generate a presign link for S3 uploads. You can pass these fields to a form.
 * Will add a view that can be used as a basis for the S3 form upload
