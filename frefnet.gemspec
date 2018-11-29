@@ -20,4 +20,9 @@ Gem::Specification.new do |s|
   s.add_dependency "mime-types", "~> 3.2.2"
 
   s.add_development_dependency "pg"
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'spring-commands-rspec'
+  s.add_development_dependency 'byebug'
+
+  s.test_files = Dir["spec/**/*"]
 end
