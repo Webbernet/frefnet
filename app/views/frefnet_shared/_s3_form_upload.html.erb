@@ -1,3 +1,6 @@
-<%= form_tag "https://#{Frefnet.config.bucket}.s3.ap-southeast-2.amazonaws.com/", enctype: 'multipart/form-data', id: 'file_upload', authenticity_token: false, enforce_utf8: false do %>
+<% if !defined? file_upload_id %>
+  <% file_upload_id = 'file_upload' %>
+<% end %>
+<%= form_tag "https://#{Frefnet.config.bucket}.s3.ap-southeast-2.amazonaws.com/", enctype: 'multipart/form-data', id: file_upload_id, authenticity_token: false, enforce_utf8: false do %>
   <%= yield %>
 <% end %>
