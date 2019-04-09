@@ -14,14 +14,15 @@ function addHiddenFieldToForm(formId) {
   var input = $('<input>').attr({
     type: 'hidden',
     name: "<%= params.fetch(:form_id) %>_"+ 'frefnet_file_references',
-    id: "<%= "#{params.fetch(:id)}-#{filerowId}" %>"
+    id: "<%= "#{params.fetch(:id)}-#{filerowId}" %>",
+    multiple: 'multiple'
   })
 
   input.appendTo(form);
 }
 
 function addRow() {
-  var fileRow = "<%= j render 'shared/multiple_file_upload_row', form_id: params.fetch(:form_id) , id: filerowId, required: true, class: 'form-control' %>"
+  var fileRow = "<%= j render 'shared/multiple_file_upload_row', form_id: params.fetch(:form_id), id: filerowId, required: true, class: 'form-control' %>"
 
   uploadContainer.append(fileRow);
 }
