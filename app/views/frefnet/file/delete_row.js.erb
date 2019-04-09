@@ -1,7 +1,7 @@
 var rowId = $('#' + "<%= params.fetch(:id) %>")
 var row = rowId.closest('.tdesk-multiple-file-upload-row');
 var hiddenFieldId = rowId.closest('form').attr('id')
-var hiddenField = $('#' + hiddenFieldId)
+var hiddenField = $('#' + hiddenFieldId + '-field')
 
 deleteRow(row, hiddenField)
 
