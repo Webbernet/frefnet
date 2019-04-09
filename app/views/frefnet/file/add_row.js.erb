@@ -21,7 +21,7 @@ function addHiddenFieldToForm(formId) {
 }
 
 function addRow() {
-  var fileRow = "<%= j render 'shared/multiple_file_upload_row', id: filerowId, required: true, class: 'form-control' %>"
+  var fileRow = "<%= j render 'shared/multiple_file_upload_row', form_id: params.fetch(:form_id) , id: filerowId, required: true, class: 'form-control' %>"
 
   uploadContainer.append(fileRow);
 }
