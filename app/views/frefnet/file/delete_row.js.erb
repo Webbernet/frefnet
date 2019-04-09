@@ -1,0 +1,10 @@
+var row = $(this).closest('.tdesk-multiple-file-upload-row');
+var hiddenFieldId = $(this).closest('form').attr('id')
+var hiddenField = $('#' + hiddenFieldId)
+
+deleteRow(row, hiddenField)
+
+function deleteRow(rowSelector, hiddenFieldSelector) {
+  rowSelector.remove()
+  hiddenFieldSelector.remove()
+}
