@@ -8,10 +8,8 @@ deleteRow(row, hiddenField)
 function deleteRow(rowSelector, hiddenFieldSelector) {
   var rowCount = $('.tdesk-multiple-file-upload-row').length
 
-  debugger
-
   if (rowCount === 1) {
-    toastr.warning('You must upload AT LEAST one file')
+    toastr.warning('You must upload at least one file')
     return
   }
 
