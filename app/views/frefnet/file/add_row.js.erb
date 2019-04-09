@@ -15,7 +15,7 @@ function addHiddenFieldToForm(formId) {
 
   $('<input>').attr({
     type: 'hidden',
-    name: 'frefnet-file-references',
+    name: 'frefnet_file_references',
     id: "<%= params.fetch(:id) %>-field-" + inputCount
   }).appendTo(form);
 }
