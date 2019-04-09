@@ -13,7 +13,7 @@ function addHiddenFieldToForm(formId) {
   var form = $('#' + formId);
   var input = $('<input>').attr({
     type: 'hidden',
-    name: "<%= params.fetch(:form_id) %>"+ '[frefnet_file_references]',
+    name: "<%= params.fetch(:form_id) %>"+ '[frefnet_file_references][]',
     id: "<%= "#{filerowId}-field" %>",
     multiple: 'multiple'
   })
