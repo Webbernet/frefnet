@@ -14,7 +14,7 @@ function addHiddenFieldToForm(formId) {
   var input = $('<input>').attr({
     type: 'hidden',
     name: "<%= params.fetch(:form_id) %>_"+ 'frefnet_file_references',
-    id: "<%= "#{params.fetch(:id)}-#{filerowId}" %>",
+    id: "<%= "#{filerowId}-field" %>",
     multiple: 'multiple'
   })
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
     frefnetPresignUploadPath: '<%= frefnet.file_presign_upload_path %>',
     fileUploadId: "<%= filerowId %>",
     frefnetCallback: function (fileRefId) {
-      $("<%= "##{filerowId}" %>").val(fileRefId);
+      $("<%= "##{filerowId}-field" %>").val(fileRefId);
     }
   });
 })
