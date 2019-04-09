@@ -1,11 +1,9 @@
 var rowId = $('#' + "<%= params.fetch(:id) %>")
 var row = rowId.closest('.tdesk-multiple-file-upload-row');
-var hiddenFieldId = rowId.closest('form').attr('id')
-var hiddenField = $('#' + hiddenFieldId + '-field')
 
-deleteRow(row, hiddenField)
+deleteRow(row)
 
-function deleteRow(rowSelector, hiddenFieldSelector) {
+function deleteRow(rowSelector) {
   var rowCount = $('.tdesk-multiple-file-upload-row').length
 
   if (rowCount === 1) {
@@ -14,5 +12,18 @@ function deleteRow(rowSelector, hiddenFieldSelector) {
   }
 
   rowSelector.remove()
-  hiddenFieldSelector.remove()
+  removeHiddenFields()
+}
+
+function removeHiddenFields() {
+  var hiddenFieldId = rowId.closest('form').attr('id')
+  var hiddenField = $('#' + hiddenFieldId + '-field')
+  hiddenField.remove()
+
+  <% if local_assigns.fetch(:file_reference) %>
+  debugger
+  var existingFileHiddenField = $('#' + file_reference)
+
+  existingFileHiddenField.remove()
+  <% end %>
 }
