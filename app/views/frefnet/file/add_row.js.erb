@@ -1,4 +1,4 @@
-<% filerowId = "#{params.fetch(:id)}-#{SecureRandom.hex(4)}" %>
+<% filerowId ||= "#{params.fetch(:id)}-#{SecureRandom.hex(4)}" %>
 
 var uploadContainer = $('#multiple-file-upload')
 
