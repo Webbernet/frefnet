@@ -21,9 +21,9 @@ function removeHiddenFields() {
   hiddenField.remove()
 
   <% if params.fetch(:file_reference, false) %>
-  var fileRef = "<%= params.fetch(:file_reference) %>"
-  var existingFileHiddenField = $('input[value="' + fileRef + '"]')
+    var fileRef = "<%= params.fetch(:file_reference) %>"
+    var existingFileHiddenField = $('input[value="' + fileRef + '"]')
 
-  existingFileHiddenField.remove()
+    existingFileHiddenField.remove()
   <% end %>
 }
