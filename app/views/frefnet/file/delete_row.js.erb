@@ -20,7 +20,7 @@ function removeHiddenFields() {
   var hiddenField = $('#' + hiddenFieldId + '-field')
   hiddenField.remove()
 
-  <% if local_assigns.fetch(:file_reference, false) %>
+  <% if params.fetch(:file_reference, false) %>
   debugger
   var existingFileHiddenField = $('#' + file_reference)
 
