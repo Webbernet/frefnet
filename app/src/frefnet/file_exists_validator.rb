@@ -31,7 +31,7 @@ module Frefnet
 
     def frefnet_ids_to_check
       @form.attributes.map do |key, value|
-        next unless key.to_s.include?('frefnet')
+        next unless key.to_s.include?('frefnet') || key.to_s.include?('file_reference')
         value
       end
     end
