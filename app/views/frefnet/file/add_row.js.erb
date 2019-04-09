@@ -22,7 +22,7 @@ function addHiddenFieldToForm(formId) {
     type: 'hidden',
     name: 'frefnet-file-references',
     id: "<%= params.fetch(:id) %>"
-  }).append(form);
+  }).appendTo(form);
 }
 
 function addRow() {
