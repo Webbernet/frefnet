@@ -1,7 +1,6 @@
 <% filerowId = "#{params.fetch(:id)}-#{SecureRandom.hex(4)}" %>
 
 var uploadContainer = $('#multiple-file-upload')
-var inputCount = uploadContainer.find('input').length
 
 generateFileUploadRow()
 
@@ -16,7 +15,7 @@ function addHiddenFieldToForm(formId) {
   $('<input>').attr({
     type: 'hidden',
     name: 'frefnet_file_references',
-    id: "<%= params.fetch(:id) %>-field-" + inputCount
+    id: "<%= params.fetch(:id) %>-" + filerowId
   }).appendTo(form);
 }
 
@@ -31,7 +30,7 @@ $(document).ready(function () {
     frefnetPresignUploadPath: '<%= frefnet.file_presign_upload_path %>',
     fileUploadId: "<%= filerowId %>",
     frefnetCallback: function (fileRefId) {
-      $('#' + "<%= params.fetch(:id) %>-field-" + inputCount).val(fileRefId);
+      $("<%= "##{params.fetch(:id)}-#{filerowId}" %>").val(fileRefId);
     }
   });
 })
