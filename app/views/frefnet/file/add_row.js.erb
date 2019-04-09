@@ -1,0 +1,33 @@
+generateFileUploadRow()
+
+$(document).ready(function () {
+  new App.Lib.FileUploader({
+    frefnetPresignUploadPath: '<%= frefnet.file_presign_upload_path %>',
+    fileUploadId: 'file-upload',
+    frefnetCallback: function (fileRefId) {
+      $('#frefnet_file_reference_id').val(fileRefId);
+    }
+  });
+})
+
+function generateFileUploadRow() {
+  addRow();
+  addHiddenFieldToForm("<%= params.fetch(:form_id) %>")
+}
+
+function addHiddenFieldToForm(formId) {
+  var form = $('#' + formId);
+
+  $('input').attr({
+    type: 'hidden',
+    name: 'frefnet-file-references',
+    id: "<%= params.fetch(:id) %>"
+  }).append(form);
+}
+
+function addRow() {
+  var uploadContainer = $('#multiple-file-upload')
+  var fileRow = "<%= j render 'shared/multiple_file_upload_row', id: 'file-upload', required: true, class: 'form-control' %>"
+
+  uploadContainer.append(fileRow);
+}
