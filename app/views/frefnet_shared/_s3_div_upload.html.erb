@@ -1,0 +1,4 @@
+<% if !defined? file_upload_id %>
+  <% file_upload_id = 'file_upload' %>
+<% end %>
+<div class="<%= form_class %>" data-bucket-url="<%= "https://#{Frefnet.config.bucket}.s3.ap-southeast-2.amazonaws.com/" %>" id="<%= file_upload_id %>"><%= yield %></div>
