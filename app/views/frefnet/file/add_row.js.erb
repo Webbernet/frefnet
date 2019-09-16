@@ -1,0 +1,38 @@
+<% filerowId ||= "#{params.fetch(:id)}-#{SecureRandom.hex(4)}" %>
+
+var uploadContainer = $('#multiple-file-upload')
+
+generateFileUploadRow()
+
+function generateFileUploadRow() {
+  addRow();
+  addHiddenFieldToForm("<%= params.fetch(:form_id) %>")
+}
+
+function addHiddenFieldToForm(formId) {
+  var form = $('#' + formId);
+  var input = $('<input>').attr({
+    type: 'hidden',
+    name: "<%= params.fetch(:form_id) %>"+ '[frefnet_file_references][]',
+    id: "<%= "#{filerowId}-field" %>",
+    multiple: 'multiple'
+  })
+
+  input.appendTo(form);
+}
+
+function addRow() {
+  var fileRow = "<%= j render 'shared/multiple_file_upload_row', file_reference: (params[:file_reference] || false), form_id: params.fetch(:form_id), id: filerowId, required: true, class: 'form-control' %>"
+
+  uploadContainer.append(fileRow);
+}
+
+$(document).ready(function () {
+  new App.Lib.FileUploader({
+    frefnetPresignUploadPath: '<%= frefnet.file_presign_upload_path %>',
+    fileUploadId: "<%= filerowId %>",
+    frefnetCallback: function (fileRefId) {
+      $("<%= "##{filerowId}-field" %>").val(fileRefId);
+    }
+  });
+})

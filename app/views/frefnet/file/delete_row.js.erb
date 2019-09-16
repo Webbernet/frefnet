@@ -1,0 +1,31 @@
+var rowId = $('#' + "<%= params.fetch(:id) %>")
+var row = rowId.closest('.tdesk-multiple-file-upload-row');
+
+deleteRow(row)
+
+function deleteRow(rowSelector) {
+  var rowCount = $('.tdesk-multiple-file-upload-row').length
+
+  if (rowCount === 1) {
+    toastr.warning('You must upload at least one file')
+    return
+  }
+
+  debugger
+
+  rowSelector.remove()
+  removeHiddenFields()
+}
+
+function removeHiddenFields() {
+  var hiddenFieldId = rowId.closest('form').attr('id')
+  var hiddenField = $('#' + hiddenFieldId + '-field')
+  hiddenField.remove()
+
+  <% if params.fetch(:file_reference, false) %>
+    var fileRef = "<%= params.fetch(:file_reference) %>"
+    var existingFileHiddenField = $('input[value="' + fileRef + '"]')
+
+    existingFileHiddenField.remove()
+  <% end %>
+}
