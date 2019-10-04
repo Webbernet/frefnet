@@ -2,8 +2,8 @@
 # URL that can be used to access the file.
 module Frefnet
   class DownloadLinkRetriever
-    def initialize(reference_id)
-      @reference_id = reference_id
+    def initialize(reference_id_or_model)
+      @reference_id_or_model = reference_id_or_model
     end
 
     def run
@@ -24,7 +24,9 @@ module Frefnet
     end
 
     def file
-      @file ||= Frefnet::FileReference.find(@reference_id)
+      return @reference_id_or_model if reference_id_or_model.is_a?(Frefnet::FileReference)
+
+      @file ||= Frefnet::FileReference.find(@reference_id_or_model)
     end
 
     def content_disposition
