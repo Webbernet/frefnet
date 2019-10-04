@@ -24,7 +24,7 @@ module Frefnet
     end
 
     def file
-      return @reference_id_or_model if reference_id_or_model.is_a?(Frefnet::FileReference)
+      return @reference_id_or_model if @reference_id_or_model.is_a?(Frefnet::FileReference)
 
       @file ||= Frefnet::FileReference.find(@reference_id_or_model)
     end
