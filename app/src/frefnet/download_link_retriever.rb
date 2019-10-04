@@ -28,7 +28,7 @@ module Frefnet
     end
 
     def content_disposition
-      "attachment; filename=#{file.original_filename}"
+      "attachment; filename=\"#{file.original_filename}\""
     end
   end
 end
