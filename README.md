@@ -24,6 +24,7 @@ Frefnet::ContentTypeFinder.run(filename)
 <% end %>
 ```
 
+
 ## Installation
 Add this line to your application's Gemfile:
 
@@ -43,4 +44,13 @@ If you want to make use of the presign upload endpoint, add this to your routes 
 
 ```ruby
 mount Frefnet::Engine => '/frefnet'
+```
+## Adding a reference to an existing modal
+
+```ruby
+class AddReferenceToSlide < ActiveRecord::Migration[6.0]
+  def change
+    add_reference :slides, :frefnet_file_reference, type: :uuid
+  end
+end
 ```
