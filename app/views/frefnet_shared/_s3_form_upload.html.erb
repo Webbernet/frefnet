@@ -7,7 +7,6 @@
         $('#file-chooser').click(function () {
             $('#file-upload-field').trigger('click');
         })
-    });
 
     function FileUploader(options) {
         $('#' + options.fileUploadId).fileupload({
@@ -87,6 +86,8 @@
             $(this).parent().find('.file-upload-input').click();
         });
     }
+ });
+
 </script>
 
 <% if !defined? file_upload_id %>
