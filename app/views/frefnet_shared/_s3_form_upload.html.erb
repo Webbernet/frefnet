@@ -1,6 +1,97 @@
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload.min.js"></script>
+<script>
+
+    $( document ).ready(function() {
+        $('#file-chooser').click(function () {
+            $('#file-upload-field').trigger('click');
+        })
+    });
+
+    function FileUploader(options) {
+        $('#' + options.fileUploadId).fileupload({
+            forceiframetransport: true,
+            autoupload: true,
+            url: options.useDivMode ? $('#' + options.fileUploadId).data('bucketUrl') : null,
+            datatype: 'json',
+            add: function (event, data) {
+                var uploadErrors = [];
+                if (options.acceptFileTypes) {
+                    var acceptFileTypes = new RegExp("(.|/)(" + options.acceptFileTypes.join('|') + ")$", 'i');
+                    var fileName = data.originalFiles[0]['name'];
+                    if(fileName.length && !acceptFileTypes.test(fileName)) {
+                        uploadErrors.push(fileName + ' is not an accepted file type, accepted types are ' + options.acceptFileTypes.join(', '));
+                    }
+
+                    if(uploadErrors.length > 0) {
+                        alert(uploadErrors.join("\n"));
+                        return;
+                    }
+                }
+
+                $.ajax({
+                    url: options.frefnetPresignUploadPath,
+                    type: 'post',
+                    datatype: 'json',
+                    data: { file_name: data.files[0].name },
+                    success: function (retdata) {
+                        $.each(retdata.upload_fields, function (k, v) {
+                            $('#' + options.fileUploadId).append('<input type=\'hidden\' name=' + k + ' value="' + v + '"></input>');
+                        });
+
+
+                        if (options.useDivMode) {
+                            data.formData = {};
+                            $.each(retdata.upload_fields, function (k, v) {
+                                data.formData[k] = v;
+                            });
+                        }
+
+                        data.submit();
+
+                        options.onFrefCreation(retdata.file_ref_id);
+
+                        $('#' + options.fileUploadId).find('.loader').removeClass('hidden');
+                        $('#' + options.fileUploadId).find('input[type="hidden"]').remove();
+                        $('#' + options.fileUploadedDetailsId).find('.loader-text').html(retdata.file_name);
+
+                        // change button text to shortened file name
+                        var shortText = jQuery.trim(retdata.file_name).substring(0, 30).trim(this) + "...";
+                        $('#' + options.fileUploadId).find('.file-button').text(shortText);
+                    }
+                });
+            },
+            send: function (e, data) {
+                $('#' + options.fileUploadedDetailsId).show();
+                $('#' + options.formSubmitButtonId).prop('disabled', true);
+                $('#' + options.fileUploadId).find('.loader').removeClass('hidden');
+            },
+            fail: function (e, data) {
+                $('#' + options.fileUploadId).show();
+                $('#' + options.fileUploadedDetailsId).hide();
+                $('#' + options.formSubmitButtonId).prop('disabled', false);
+                $('#' + options.fileUploadId).find('.loader').addClass('hidden');
+            },
+            done: function (event, data) {
+                $('#' + options.fileUploadedDetailsId).find('.loader').fadeOut('slow');
+                $('#' + options.fileUploadId).find('.loader').fadeOut('slow');
+            },
+            success: function (event, data) {
+                $('#' + options.formSubmitButtonId).prop('disabled', false);
+                $('#' + options.fileUploadId).show();
+                options.onUploadSuccess();
+            }
+        });
+        $('#' + options.fileUploadId).find('.file-button').on('click', function () {
+            $(this).parent().find('.file-upload-input').click();
+        });
+    }
+</script>
+
 <% if !defined? file_upload_id %>
   <% file_upload_id = 'file_upload' %>
 <% end %>
 <%= form_tag "https://#{Frefnet.config.bucket}.s3.ap-southeast-2.amazonaws.com/", enctype: 'multipart/form-data', id: file_upload_id, authenticity_token: false, enforce_utf8: false, class: defined?(form_class) ? form_class : '' do %>
   <%= yield %>
 <% end %>
+
