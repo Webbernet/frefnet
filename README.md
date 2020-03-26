@@ -125,3 +125,12 @@ class AddReferenceToSlide < ActiveRecord::Migration[6.0]
   end
 end
 ```
+
+or with a custom name
+
+```ruby
+class AddReferenceToSlide < ActiveRecord::Migration[6.0]
+  def change
+    add_reference :courses, :thumbnail_frefnet, foreign_key: { to_table: :frefnet_file_references }, type: :uuid
+  end
+end
