@@ -36,7 +36,9 @@ Create a form with an upload button using the `#file-chooser` id. The form shoul
   <div class="form-group" style="margin: 0">
     <button type="button" id="file-chooser" class="btn btn-secondary">
       <i class="fas fa-file-upload"></i>&nbsp
-      Upload
+       <span class="filename">
+         Upload
+       </span>
     </button>
     <div class="loader" style="display: none;">
       <i class="fas fa-spinner fa-spin"></i>
@@ -134,3 +136,8 @@ class AddReferenceToSlide < ActiveRecord::Migration[6.0]
     add_reference :courses, :thumbnail_frefnet, foreign_key: { to_table: :frefnet_file_references }, type: :uuid
   end
 end
+
+class Course
+  belongs_to :thumbnail_frefnet, class_name: 'Frefnet::FileReference'
+end
+```
