@@ -38,7 +38,9 @@ Create a form with an upload button using the `#file-chooser` id. The form shoul
       <i class="fas fa-file-upload"></i>&nbsp
       Upload
     </button>
-    <div class="loader hidden" style="display: inline-flex;"></div>
+    <div class="loader" style="display: none;">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
   </div>
 
   <div class="form-group required">
