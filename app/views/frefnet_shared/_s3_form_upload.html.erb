@@ -59,7 +59,7 @@
 
             // change button text to shortened file name
             var shortText = jQuery.trim(retdata.file_name).substring(0, 30).trim(this) + "...";
-            $('#' + options.fileUploadId).find('.file-button').text(shortText);
+            $('.filename').html(shortText);
           }
         });
       },
