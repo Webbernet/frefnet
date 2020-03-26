@@ -53,8 +53,7 @@
             data.submit();
 
             options.onFrefCreation(retdata.file_ref_id);
-
-            $('.loader').hide();
+            
             $('#' + options.fileUploadId).find('input[type="hidden"]').remove();
             $('.loader-text').html(retdata.file_name);
 
