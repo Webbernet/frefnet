@@ -54,9 +54,9 @@
 
             options.onFrefCreation(retdata.file_ref_id);
 
-            $('#' + options.fileUploadId).find('.loader').hide();
+            $('.loader').hide();
             $('#' + options.fileUploadId).find('input[type="hidden"]').remove();
-            $('#' + options.fileUploadedDetailsId).find('.loader-text').html(retdata.file_name);
+            $('.loader-text').html(retdata.file_name);
 
             // change button text to shortened file name
             var shortText = jQuery.trim(retdata.file_name).substring(0, 30).trim(this) + "...";
@@ -67,17 +67,17 @@
       send: function (e, data) {
         $('#' + options.fileUploadedDetailsId).show();
         $('#' + options.formSubmitButtonId).prop('disabled', true);
-        $('#' + options.fileUploadId).find('.loader').show();
+        $('.loader').show();
       },
       fail: function (e, data) {
         $('#' + options.fileUploadId).show();
         $('#' + options.fileUploadedDetailsId).hide();
         $('#' + options.formSubmitButtonId).prop('disabled', false);
-        $('#' + options.fileUploadId).find('.loader').hide();
+        $('.loader').hide();
       },
       done: function (event, data) {
-        $('#' + options.fileUploadedDetailsId).find('.loader').fadeOut('slow');
-        $('#' + options.fileUploadId).find('.loader').fadeOut('slow');
+        $('.loader').fadeOut('slow');
+        $('.loader').fadeOut('slow');
       },
       success: function (event, data) {
         $('#' + options.formSubmitButtonId).prop('disabled', false);
