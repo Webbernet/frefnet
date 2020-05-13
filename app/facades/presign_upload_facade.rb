@@ -42,7 +42,8 @@ class PresignUploadFacade
 
   def frefnet_file
     @frefnet_file ||= Frefnet::FileCreator.new(
-      original_filename: file_name
+      original_filename: file_name,
+      key_start_ovveride: params[:key_start_override]
     ).run
   end
 
