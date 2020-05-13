@@ -37,7 +37,7 @@
           url: options.frefnetPresignUploadPath,
           type: 'post',
           datatype: 'json',
-          data: {file_name: data.files[0].name},
+          data: {file_name: data.files[0].name, key_start_override: options.keyStartOverride},
           success: function (retdata) {
             $.each(retdata.upload_fields, function (k, v) {
               $('#' + options.fileUploadId).append('<input type=\'hidden\' name=' + k + ' value="' + v + '"></input>');
