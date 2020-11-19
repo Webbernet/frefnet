@@ -16,6 +16,13 @@ Frefnet::DownloadLinkRetriever.new(reference_id).run
 Frefnet::ContentTypeFinder.run(filename)
 ```
 
+### Post Request
+
+You can make use of the Frefnet 'presign_upload' route usually at '/frefnet/file/presign_upload' which accepts two parameters
+
+* `file_name` The original name of the file being uploaded. This is handy so what we can retain the filename when someone downloads the file again
+* `key_start_override` Usually frefnet will organise uploads in the `file_storage` folder in S3. This parameter allows you to override this and upload to a different spot if you would like
+
 ### Form Partials
 
 This partial will setup a form POST to amazon S3, with all the required fields.
