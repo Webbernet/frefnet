@@ -19,7 +19,8 @@ class PresignUploadFacade
     {
       upload_fields: presigned_post_fields,
       file_ref_id: frefnet_file.id,
-      file_name: file_name
+      file_name: file_name,
+      url: Frefnet::DownloadLinkRetriever.new(frefnet_file).run
     }
   end
 
