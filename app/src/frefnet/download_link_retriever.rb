@@ -2,9 +2,8 @@
 # URL that can be used to access the file.
 module Frefnet
   class DownloadLinkRetriever
-    def initialize(reference_id_or_model, content_disposition = 'attachment')
+    def initialize(reference_id_or_model)
       @reference_id_or_model = reference_id_or_model
-      @content_disposition = content_disposition
     end
 
     def run
@@ -30,7 +29,7 @@ module Frefnet
     end
 
     def content_disposition
-      "#{@content_disposition}; filename=\"#{file.original_filename}\""
+      "attachment; filename=\"#{file.original_filename}\""
     end
   end
 end
