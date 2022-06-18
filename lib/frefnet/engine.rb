@@ -1,6 +1,10 @@
 module Frefnet
   class Engine < ::Rails::Engine
     isolate_namespace Frefnet
+
+    initializer "s3 presigner" do
+      PRESIGN_CLIENT = Aws::S3::Presigner.new
+    end
   end
 
   def self.setup(&block)

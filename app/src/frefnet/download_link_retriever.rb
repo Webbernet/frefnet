@@ -14,8 +14,7 @@ module Frefnet
     private
 
     def presign(key)
-      s3 = Aws::S3::Presigner.new
-      s3.presigned_url(
+      Frefnet::Engine::PRESIGN_CLIENT.presigned_url(
         :get_object,
         bucket: Frefnet.config.bucket,
         key: key,
