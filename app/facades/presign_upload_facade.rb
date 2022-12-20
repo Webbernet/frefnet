@@ -19,7 +19,8 @@ class PresignUploadFacade
     {
       upload_fields: presigned_post_fields,
       file_ref_id: frefnet_file.id,
-      file_name: file_name
+      file_name: file_name,
+      url: Frefnet::DownloadLinkRetriever.new(frefnet_file).run
     }
   end
 
@@ -42,7 +43,8 @@ class PresignUploadFacade
 
   def frefnet_file
     @frefnet_file ||= Frefnet::FileCreator.new(
-      original_filename: file_name
+      original_filename: file_name,
+      key_start_override: @params[:key_start_override]
     ).run
   end
 
