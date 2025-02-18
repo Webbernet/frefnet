@@ -30,7 +30,7 @@ module Frefnet
     end
 
     def content_disposition
-      "#{@content_disposition}; filename=\"#{file.original_filename}\""
+      "#{@content_disposition}; filename=\"#{ERB::Util.url_encode(file.original_filename)}\""
     end
   end
 end
